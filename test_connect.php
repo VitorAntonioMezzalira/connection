@@ -2,6 +2,8 @@
 
     include "functions/db_connection.php";
 
-    TestCon();
+    $dbname = "";
+
+    TestCon($dbname);
     
 ?>

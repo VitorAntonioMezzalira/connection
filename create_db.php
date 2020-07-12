@@ -3,14 +3,8 @@
     include "functions/db_connection.php";
 
     $dbname = $_GET["nNameCreate"];
-    
-   // $dbname = $_GET["nNameDrop"];
+    $dbact = $_GET["nAction"];
 
-    if(CreateDB($dbname)) {
-        echo "Database Created!";
-    } 
-    if(!CreateDB($dbname)) {
-        echo "database don't create!";
-    }
+    echo CreateDropDB($dbact, $dbname);
 
 ?>

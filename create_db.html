@@ -7,14 +7,14 @@
 </head>
 <body>
     
-    <form method="get" action="create_db.php">Create database
-
-        <fieldset>
-
-            <label for="iNameDB">Database Name: </label><input type="text" name="nNameCreate" id="iNameDB">
-            <input type="submit">
-
-        </fieldset>
+    <form method="get" action="create_db.php">Create database:
+        
+        <br>
+        <input type="radio" name="nAction" id="iCrea" value="create"><label for="iCrea">Create</label>
+        <input type="radio" name="nAction" id="iDrop" value="drop"><label for="iDrop">Drop</label>
+        <br>
+        <label for="iNameDB">Database Name: </label><input type="text" name="nNameCreate" id="iNameDB">
+        <input type="submit">
 
     </form>
 
