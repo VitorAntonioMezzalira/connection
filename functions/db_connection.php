@@ -65,49 +65,30 @@
         $conn = CloseCon($conn);
     }
 
-    // select * from ref_tr
+    // select * from a table 
     function SelectAll($dbname, $tbname) {
 
         $conn = OpenCon($dbname);
 
         $sql = "SELECT * FROM $tbname";
 
-        $style = "<style>
-            td, th {
-                border: 1px solid black;
-            }
-        
-        </style>";
+        return $conn->query($sql);
 
-        $result = $conn->query($sql);
+        $conn = CloseCon($conn);
 
-        if ($result->num_rows > 0) {
-
-            $text = "<table><tr><th> ID </th><th> NOME </th><th> TELEFONE </th><th> E-MAIL </th></tr>";
-
-            while($row = $result->fetch_assoc()) {
-
-              $text .= "<tr>
-              <td>" . $row["id"] . "</td>
-              <td>" . $row["nome"] . "</td>
-              <td>" . $row["telefone"] . "</td>
-              <td>" . $row["email"] . "</td>
-              <td class='update'><a href='update.php?nId=" . $row["id"] . "&dbname=" . $dbname . "&tbname=" . $tbname . "'>editar</a></td> 
-              <td class='delete'><a href='delete.php?nId=" . $row["id"] . "'>deletar</a></td>
-              </tr>";
-            }
-            $text .= "</table>";
-
-            echo $text;
-            echo $style;
-
-          } else {
-            echo "0 results";
-          }
-
-          $conn = CloseCon($conn);
     }
 
+    // return the results from the command
+    function Search($dbname, $sql) {
+        $conn = OpenCon($dbname);
+
+        return $conn->query($sql);
+
+        $conn = CloseCon($conn);
+
+    }
+
+    // select a row by ID
     function SelectById($dbname, $tbname, $id) {
 
         $conn = OpenCon($dbname);
@@ -122,6 +103,7 @@
 
     }
 
+    // delete a row
     function DeleteRow($dbname, $tbname, $id) {
 
         $conn = OpenCon($dbname);
@@ -136,6 +118,27 @@
 
         $conn = CloseCon($conn);
 
+    }
+
+    // get all ID rows
+    function GetIdList($dbname, $tbname) {
+
+        $conn = OpenCon($dbname);
+
+        $sql = "SELECT id FROM $tbname";
+
+        $result = $conn->query($sql);
+
+        $i = 0;
+
+        if($result->num_rows) {
+
+            while($row = $result->fetch_assoc()) {
+                $ids[$i] = $row['id'];
+                $i++;
+            }
+            return $ids;
+        }
     }
 
 ?>
